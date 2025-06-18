@@ -8,7 +8,6 @@ from .schemas import (
 contact_bp = Blueprint("contacts", __name__, url_prefix="/contacts")
 reasons_bp = Blueprint("reasons", __name__, url_prefix="/contact-reasons")
 
-# Endpoints para Contactos
 @contact_bp.route("/", methods=["POST"])
 def add_contact():
     new_contact = contact_schema.load(request.json)
@@ -26,7 +25,6 @@ def get_contact(contact_id):
     contact = Contact.query.get_or_404(contact_id)
     return contact_schema.dump(contact), 200
 
-# Endpoints para Razones de Contacto (solo GET para el frontend)
 @reasons_bp.route("/", methods=["GET"])
 def get_reasons():
     all_reasons = ContactReason.query.all()
